@@ -5,14 +5,14 @@ EXPOSE 443
 
 FROM microsoft/dotnet:2.2-sdk AS build
 WORKDIR /src
-COPY ["src/Api/Api.csproj", "src/Api/"]
-RUN dotnet restore "src/Api/Api.csproj"
+COPY src/Api/Api.csproj src/Api/
+RUN dotnet restore src/Api/Api.csproj
 COPY . .
-WORKDIR "/src/src/Api"
-RUN dotnet build "Api.csproj" -c Release -o /app
+WORKDIR /src/src/Api
+RUN dotnet build Api.csproj -c Release -o /app
 
 FROM build AS publish
-RUN dotnet publish "Api.csproj" -c Release -o /app
+RUN dotnet publish Api.csproj -c Release -o /app
 
 FROM base AS final
 WORKDIR /app
