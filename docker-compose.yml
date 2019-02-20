@@ -7,13 +7,8 @@ services:
       context: .
       dockerfile: src/Api/Dockerfile
     environment:
-      - ASPNETCORE_URLS="https://+;http://+"
-      - ASPNETCORE_HTTPS_PORT=8001
       - ASPNETCORE_Kestrel__Certificates__Default__Password=crypticpassword
       - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
     volumes:
       - ${HOME}/.aspnet/https:/https/
     command: dotnet dev-certs https --trust
-    ports:
-      - "8000:80"
-      - "8001:443"
